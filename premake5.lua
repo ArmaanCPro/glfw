@@ -5,17 +5,24 @@ project "GLFW"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	includedirs { "include/" }
+
 	files
 	{
-		"include/GLFW/glfw3.h",
-		"include/GLFW/glfw3native.h",
+		--"include/GLFW/glfw3.h",
+		--"include/GLFW/glfw3native.h",
 		"src/glfw_config.h",
 		"src/context.c",
 		"src/init.c",
 		"src/input.c",
 		"src/monitor.c",
 		"src/vulkan.c",
-		"src/window.c"
+		"src/window.c",
+		"src/platform.c",
+		"src/null_init.c",
+		"src/null_monitor.c",
+		"src/null_window.c",
+		"src/null_joystick.c"
 	}
 	filter "system:linux"
 		pic "On"
@@ -34,7 +41,9 @@ project "GLFW"
 			"src/glx_context.c",
 			"src/egl_context.c",
 			"src/osmesa_context.c",
-			"src/linux_joystick.c"
+			"src/linux_joystick.c",
+			"src/posix_module.c",
+			"src/posix_poll.c"
 		}
 
 		defines
@@ -56,7 +65,8 @@ project "GLFW"
 			"src/win32_window.c",
 			"src/wgl_context.c",
 			"src/egl_context.c",
-			"src/osmesa_context.c"
+			"src/osmesa_context.c",
+			"src/win32_module.c"
 		}
 
 		defines 
